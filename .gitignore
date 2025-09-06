@@ -34,3 +34,6 @@ build/
 
 ### Persistencia datos ###
 postgres_data/
+
+### Variables de entorno ###
+.env
