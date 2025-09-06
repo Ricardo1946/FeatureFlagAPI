@@ -1,0 +1,13 @@
+services:
+    postgresql:
+      image: postgres:16.9-bullseye
+      container_name: postgres-db
+      environment:
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: 8081
+        POSTGRES_DB: featureFlag
+      ports:
+        - "5432:5432"
+      volumes:
+        - ./postgres_data:/var/lib/postgresql/data
+      restart: always
