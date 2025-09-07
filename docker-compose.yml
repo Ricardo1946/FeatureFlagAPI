@@ -1,0 +1,33 @@
+services:
+    springboot-app:
+      container_name: feature-flag
+      build:
+        context: .
+        dockerfile: Dockerfile
+      depends_on:
+        - postgresql
+      env_file:
+        - .env
+      environment:
+        FEATURE_FLAG_DATASOURCE_URL: ${FEATURE_FLAG_DATASOURCE_URL_DOCKER}
+      volumes:
+        - ./src:/opt/app/src
+        - ./pom.xml:/opt/app/pom.xml
+      ports:
+        - "8080:8080"
+      restart: on-failure
+
+    postgresql:
+      image: postgres:16.9-bullseye
+      container_name: postgres-db
+      env_file:
+        - .env
+      environment:
+        POSTGRES_USER: ${FEATURE_FLAG_DATASOURCE_USERNAME}
+        POSTGRES_PASSWORD: ${FEATURE_FLAG_DATASOURCE_PASSWORD}
+        POSTGRES_DB: ${FEATURE_FLAG_DATASOURCE_DB:-featureFlag}
+      ports:
+        - "5432:5432"
+      volumes:
+        - ./postgres_data:/var/lib/postgresql/data
+      restart: always
