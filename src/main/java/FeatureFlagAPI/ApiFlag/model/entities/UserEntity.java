@@ -1,5 +1,6 @@
-package FeatureFlagAPI.ApiFlag.model;
+package FeatureFlagAPI.ApiFlag.model.entities;
 
+import FeatureFlagAPI.ApiFlag.model.entities.base.AuditableEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -8,17 +9,18 @@ import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.util.UUID;
 
 @Entity
-@RequiredArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class UserEntity {
+@EntityListeners(AuditingEntityListener.class)
+public class UserEntity extends AuditableEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     @NotBlank(message = "El nombre de usuario no puede estar vacío")
     @Length(min = 3, max = 10, message = "El nombre debe tener  como mínimo de 3 a 10 caracteres")

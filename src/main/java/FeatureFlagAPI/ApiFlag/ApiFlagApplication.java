@@ -2,12 +2,14 @@ package FeatureFlagAPI.ApiFlag;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @SpringBootApplication
+@EnableJpaAuditing
 public class ApiFlagApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(ApiFlagApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(ApiFlagApplication.class, args);
+    }
 
 }
